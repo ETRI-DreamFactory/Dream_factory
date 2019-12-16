@@ -1,0 +1,18 @@
+{
+  "name": "dream_factory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ETRI-DreamFactory/Dream_factory.git"
+  },
+  "dependencies": {
+    "solc": "0.4.21"
+  }
+}

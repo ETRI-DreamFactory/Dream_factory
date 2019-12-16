@@ -81,4 +81,7 @@ function update_project(uint _project_id, string new_project_name, Goal new_proj
     emit updated_goal(projects[_project_id].project_goal, new_project_goal);
     return true;
 }
+function create_project(Member[] _investor_list, uint _project_id, uint _balance, Member _proposer, uint _contribute_count, DateTime _date, bool _validate, string _project_name) private {
+    projects.push(Project(_investor_list, _project_id, _balance, _proposer, _contribute_count, now, _validate, _project_name, Goal(false,false,false)));
+}
 }
