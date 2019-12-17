@@ -1,8 +1,7 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.24;
 
-import "./DateTime.sol";
 
-contract myStruct { 
+contract myStruct{ 
 
 
 
@@ -21,8 +20,6 @@ struct Invest {
 
 struct Member {
     uint member_id;
-    Invest[] invest_list;
-    Project[] propose_list;
     address wallet;
 }
 
@@ -32,7 +29,7 @@ struct Project {
     uint balance;
     Member proposer;
     uint contribute_count;
-    DateTime date;
+    uint date;
     bool validate;
     string project_name;
     Goal project_goal;
