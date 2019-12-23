@@ -4,7 +4,7 @@
 
 1. Clone this repository to `$GOPATH/src/github.com/cryptosalamander` directory:
 
-        git clone https://github.com/cryptosalamander/gorm_crud_example.git
+        git clone https://github.com/CryptoSalamander/Go-Gin-Examples.git
 
 2. Install `glide`:
 
