@@ -1,0 +1,62 @@
+hash: d09cb21968555916db417f2810922691ea3456d65ad19a913237654f860ee2f8
+updated: 2019-12-23T00:21:22.514931+09:00
+imports:
+- name: github.com/gin-contrib/sse
+  version: 43f0f29dbd2b3f0feeebff91fd9cda22db296938
+- name: github.com/gin-gonic/gin
+  version: 15ced05c5316609bce5b43389f8e3f06102a8b18
+  subpackages:
+  - binding
+  - internal/json
+  - render
+- name: github.com/go-playground/locales
+  version: 9f105231d3a5f6877a2bf8321dfa15ea6f844b1b
+  subpackages:
+  - currency
+- name: github.com/go-playground/universal-translator
+  version: f87b1403479a348651dbf5f07f5cc6e5fcf07008
+- name: github.com/go-playground/validator
+  version: 691a5f5f25701d0a22785c982db4f22bfac47931
+- name: github.com/go-sql-driver/mysql
+  version: 72cd26f257d44c1114970e19afddcd812016007e
+- name: github.com/golang/protobuf
+  version: ed6926b37a637426117ccab59282c3839528a700
+  subpackages:
+  - proto
+- name: github.com/google/uuid
+  version: 0cd6bf5da1e1c83f8b45653022c74f71af0538a4
+- name: github.com/jinzhu/gorm
+  version: 81c17a7e2529c59efc4e74c5b32c1fb71fb12fa2
+  subpackages:
+  - dialects/mysql
+- name: github.com/jinzhu/inflection
+  version: f5c5f50e6090ae76a29240b61ae2a90dd810112e
+- name: github.com/json-iterator/go
+  version: acfec88f7a0d5140ace3dcdbee10184e3684a9e1
+- name: github.com/leodido/go-urn
+  version: a0f5013415294bb94553821ace21a1a74c0298cc
+- name: github.com/mattn/go-isatty
+  version: 31745d66dd679ac0ac4f8d3ecff168fce6170c6a
+- name: github.com/modern-go/concurrent
+  version: bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94
+- name: github.com/modern-go/reflect2
+  version: 94122c33edd36123c84d5368cfb2b69df93a0ec8
+- name: github.com/ugorji/go
+  version: 42bc974514ff101a54c6b72a0e4dee29d96c0b26
+  subpackages:
+  - codec
+- name: golang.org/x/sys
+  version: 0732a990476f7f2f5f7200b39ba4ab730c0f09f8
+  subpackages:
+  - unix
+- name: google.golang.org/appengine
+  version: b6ce0843b556e44e6416df5c2fd05db0869cc8d4
+  subpackages:
+  - cloudsql
+- name: gopkg.in/go-playground/validator.v8
+  version: 691a5f5f25701d0a22785c982db4f22bfac47931
+- name: gopkg.in/go-playground/validator.v9
+  version: 691a5f5f25701d0a22785c982db4f22bfac47931
+- name: gopkg.in/yaml.v2
+  version: 1f64d6156d11335c3f22d9330b0ad14fc1e789ce
+testImports: []
