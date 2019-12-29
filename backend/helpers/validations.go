@@ -1,8 +1,8 @@
 package helpers
 
 import (
-	"github.com/cryptosalamander/gorm_crud_example/dtos"
-	"github.com/cryptosalamander/gorm_crud_example/langs"
+	"github.com/cryptosalamander/dream_factory/dtos"
+	"github.com/cryptosalamander/dream_factory/langs"
 	"gopkg.in/go-playground/validator.v8"
 )
 

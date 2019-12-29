@@ -3,15 +3,15 @@ package main
 import (
 	"log"
 
-	"github.com/cryptosalamander/gorm_crud_example/configs"
-	"github.com/cryptosalamander/gorm_crud_example/database"
-	"github.com/cryptosalamander/gorm_crud_example/models"
-	"github.com/cryptosalamander/gorm_crud_example/repositories"
+	"github.com/cryptosalamander/dream_factory/configs"
+	"github.com/cryptosalamander/dream_factory/database"
+	"github.com/cryptosalamander/dream_factory/models"
+	"github.com/cryptosalamander/dream_factory/repositories"
 )
 
 func main() {
 
-	dbUser, dbPassword, dbUrl, dbName := "root", "root", "tcp(52.79.233.54:3306)", "test"
+	dbUser, dbPassword, dbUrl, dbName := "admin", "etri", "tcp(52.79.233.54:3306)", "test"
 
 	db, err := database.ConnectToDB(dbUser, dbPassword, dbUrl, dbName)
 
@@ -26,10 +26,14 @@ func main() {
 	}
 
 	db.AutoMigrate(&models.Contact{})
+	db.AutoMigrate(&models.Member{})
+	db.AutoMigrate(&models.Developer{})
+	db.AutoMigrate(&models.Project{})
+	db.AutoMigrate(&models.Investment{})
 
 	defer db.Close()
 
-	contactRepository := repositories.NewContactRepository(db)
-	route := configs.SetupRoutes(contactRepository)
+	DreamRepository := repositories.NewDreamRepository(db)
+	route := configs.SetupRoutes(DreamRepository)
 	route.Run(":8000")
 }

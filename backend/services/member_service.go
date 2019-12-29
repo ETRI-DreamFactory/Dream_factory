@@ -10,62 +10,65 @@ import (
 	"log"
 )
 
-func CreateContact(contact *models.Contact, repository repositories.DreamRepository) dtos.Response {
+func CreateMember(member *models.Member, repository repositories.DreamRepository) dtos.Response {
+
 	uuidResult, err := uuid.NewRandom()
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	contact.ID = uuidResult.String()
+	member.Member_id = uuidResult.String()
 
-	operationResult := repository.Save(contact)
+	operationResult := repository.SaveMember(member)
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}
 	}
 
-	var data = operationResult.Result.(*models.Contact)
+	var data = operationResult.Result.(*models.Member)
 
 	return dtos.Response{Success: true, Data: data}
 }
 
-func FindAllContacts(repository repositories.DreamRepository) dtos.Response {
-	operationResult := repository.FindAll()
+func FindAllMembers(repository repositories.DreamRepository) dtos.Response {
+	operationResult := repository.FindAllMembers()
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}
 	}
 
-	var datas = operationResult.Result.(*models.Contacts)
+	var datas = operationResult.Result.(*models.Members)
 	return dtos.Response{Success: true, Data: datas}
 }
 
-func FindContactById(id string, repository repositories.DreamRepository) dtos.Response {
-	operationResult := repository.FindOneById(id)
+func FindMemberById(id string, repository repositories.DreamRepository) dtos.Response {
+	operationResult := repository.FindMemberById(id)
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}
 	}
 
-	var data = operationResult.Result.(*models.Contact)
+	var data = operationResult.Result.(*models.Member)
 
 	return dtos.Response{Success: true, Data: data}
 }
 
-func UpdateContactById(id string, contact *models.Contact, repository repositories.DreamRepository) dtos.Response {
-	existingContactResponse := FindContactById(id, repository)
+func UpdateMemberById(id string, member *models.Member, repository repositories.DreamRepository) dtos.Response {
+	existingContactResponse := FindMemberById(id, repository)
 
 	if !existingContactResponse.Success {
 		return existingContactResponse
 	}
 
-	existingContact := existingContactResponse.Data.(*models.Contact)
+	existingMember := existingContactResponse.Data.(*models.Member)
 
-	existingContact.Name = contact.Name
-	existingContact.Email = contact.Email
-	existingContact.Address = contact.Address
-	operationResult := repository.Save(existingContact)
+	existingMember.Passwd = member.Passwd
+	existingMember.Name = member.Name
+	existingMember.Phone = member.Phone
+	existingMember.Wallet = member.Wallet
+	existingMember.Nickname = member.Nickname
+	operationResult := repository.SaveMember(existingMember)
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}
@@ -74,8 +77,8 @@ func UpdateContactById(id string, contact *models.Contact, repository repositori
 	return dtos.Response{Success: true, Data: operationResult.Result}
 }
 
-func DeleteOneContactById(id string, repository repositories.DreamRepository) dtos.Response {
-	operationResult := repository.DeleteOneById(id)
+func DeleteMemberById(id string, repository repositories.DreamRepository) dtos.Response {
+	operationResult := repository.DeleteMemberById(id)
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}
@@ -85,8 +88,8 @@ func DeleteOneContactById(id string, repository repositories.DreamRepository) dt
 
 }
 
-func Pagination(repository repositories.DreamRepository, context *gin.Context, pagination *dtos.Pagination) dtos.Response {
-	operationResult, totalPages := repository.Pagination(pagination)
+func MemberPagination(repository repositories.DreamRepository, context *gin.Context, pagination *dtos.Pagination) dtos.Response {
+	operationResult, totalPages := repository.MemberPagination(pagination)
 
 	if operationResult.Error != nil {
 		return dtos.Response{Success: false, Message: operationResult.Error.Error()}

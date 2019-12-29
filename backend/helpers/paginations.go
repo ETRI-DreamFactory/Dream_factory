@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/cryptosalamander/gorm_crud_example/dtos"
+	"github.com/cryptosalamander/dream_factory/dtos"
 	"github.com/gin-gonic/gin"
 )
 

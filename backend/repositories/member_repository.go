@@ -4,53 +4,44 @@ import (
 	"fmt"
 	"github.com/cryptosalamander/dream_factory/dtos"
 	"github.com/cryptosalamander/dream_factory/models"
-	"github.com/jinzhu/gorm"
 	"math"
 	"strings"
 )
 
-type DreamRepository struct {
-	db *gorm.DB
-}
 
-func NewDreamRepository(db *gorm.DB) *DreamRepository {
-	return &DreamRepository{db: db}
-}
-
-func (r *DreamRepository) Save(contact *models.Contact) RepositoryResult {
-	err := r.db.Save(contact).Error
+func (r *DreamRepository) SaveMember(member *models.Member) RepositoryResult {
+	err := r.db.Save(member).Error
 
 	if err != nil {
 		return RepositoryResult{Error: err}
 	}
 
-	return RepositoryResult{Result: contact}
+	return RepositoryResult{Result: member}
 }
 
-
-func (r *DreamRepository) FindAll() RepositoryResult {
-	var contacts models.Contacts
-	err := r.db.Find(&contacts).Error
+func (r *DreamRepository) FindAllMembers() RepositoryResult {
+	var members models.Members
+	err := r.db.Find(&members).Error
 
 	if err != nil {
 		return RepositoryResult{Error: err}
 	}
-	return RepositoryResult{Result: &contacts}
+	return RepositoryResult{Result: &members}
 }
 
-func (r *DreamRepository) FindOneById(id string) RepositoryResult {
-	var contact models.Contact
+func (r *DreamRepository) FindMemberById(id string) RepositoryResult {
+	var member models.Member
 
-	err := r.db.Where(&models.Contact{ID: id}).Take(&contact).Error
+	err := r.db.Where(&models.Member{Member_id: id}).Take(&member).Error
 	if err != nil {
 		return RepositoryResult{Error: err}
 	}
 
-	return RepositoryResult{Result: &contact}
+	return RepositoryResult{Result: &member}
 }
 
-func (r *DreamRepository) DeleteOneById(id string) RepositoryResult {
-	err := r.db.Delete(&models.Contact{ID: id}).Error
+func (r *DreamRepository) DeleteMemberById(id string) RepositoryResult {
+	err := r.db.Delete(&models.Member{Member_id: id}).Error
 
 	if err != nil {
 		return RepositoryResult{Error: err}
@@ -59,8 +50,8 @@ func (r *DreamRepository) DeleteOneById(id string) RepositoryResult {
 	return RepositoryResult{Result: nil}
 }
 
-func (r *DreamRepository) DeleteByIds(ids *[]string) RepositoryResult {
-	err := r.db.Where("ID IN (?)", *ids).Delete(&models.Contacts{}).Error
+func (r *DreamRepository) DeleteMembersByIds(ids *[]string) RepositoryResult {
+	err := r.db.Where("ID IN (?)", *ids).Delete(&models.Members{}).Error
 
 	if err != nil {
 		return RepositoryResult{Error: err}
@@ -69,8 +60,8 @@ func (r *DreamRepository) DeleteByIds(ids *[]string) RepositoryResult {
 	return RepositoryResult{Result: nil}
 }
 
-func (r *DreamRepository) Pagination(pagination *dtos.Pagination) (RepositoryResult, int) {
-	var contacts models.Contacts
+func (r *DreamRepository) MemberPagination(pagination *dtos.Pagination) (RepositoryResult, int) {
+	var members models.Members
 
 	totalRows, totalPages, fromRow, toRow := 0, 0, 0, 0
 
@@ -106,7 +97,7 @@ func (r *DreamRepository) Pagination(pagination *dtos.Pagination) (RepositoryRes
 		}
 	}
 
-	find = find.Find(&contacts)
+	find = find.Find(&members)
 
 	// has error find data
 	errFind := find.Error
@@ -115,10 +106,10 @@ func (r *DreamRepository) Pagination(pagination *dtos.Pagination) (RepositoryRes
 		return RepositoryResult{Error: errFind}, totalPages
 	}
 
-	pagination.Rows = contacts
+	pagination.Rows = members
 
 	// count all data
-	errCount := r.db.Model(&models.Contact{}).Count(&totalRows).Error
+	errCount := r.db.Model(&models.Member{}).Count(&totalRows).Error
 
 	if errCount != nil {
 		return RepositoryResult{Error: errCount}, totalPages

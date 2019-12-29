@@ -1,20 +1,18 @@
 package configs
 
 import (
+	"github.com/cryptosalamander/dream_factory/helpers"
+	"github.com/cryptosalamander/dream_factory/models"
+	"github.com/cryptosalamander/dream_factory/repositories"
+	"github.com/cryptosalamander/dream_factory/services"
 	"net/http"
 
-	"github.com/cryptosalamander/gorm_crud_example/dtos"
-	"github.com/cryptosalamander/gorm_crud_example/helpers"
-	"github.com/cryptosalamander/gorm_crud_example/models"
-	"github.com/cryptosalamander/gorm_crud_example/repositories"
-	"github.com/cryptosalamander/gorm_crud_example/services"
-
-	//"github.com/cryptosalamander/gorm_crud_example/dtos"
+	//"github.com/cryptosalamander/dream_factory/dtos"
 
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine {
+func SetupRoutes(DreamRepository *repositories.DreamRepository) *gin.Engine {
 	route := gin.Default()
 
 	// create route /create endpoint
@@ -38,7 +36,37 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 		code := http.StatusOK
 
 		// save contact & get it's response
-		response := services.CreateContact(&contact, *contactRepository)
+		response := services.CreateContact(&contact, *DreamRepository)
+
+		// save contact failed
+		if !response.Success {
+			//change http status code to 400
+			code = http.StatusBadRequest
+		}
+
+		context.JSON(code, response)
+	})
+
+	route.POST("/createmember", func(context *gin.Context) {
+		// initialization contact model
+		var member models.Member
+
+		//validate json
+		err := context.ShouldBindJSON(&member)
+
+		//validation errors
+		if err != nil {
+			// generate validation errors response
+			response := helpers.GenerateValidationResponse(err)
+			context.JSON(http.StatusBadRequest, response)
+			return
+		}
+
+		// default http status code = 200
+		code := http.StatusOK
+
+		// save contact & get it's response
+		response := services.CreateMember(&member, *DreamRepository)
 
 		// save contact failed
 		if !response.Success {
@@ -51,7 +79,18 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 
 	route.GET("/", func(context *gin.Context) {
 		code := http.StatusOK
-		response := services.FindAllContacts(*contactRepository)
+		response := services.FindAllContacts(*DreamRepository)
+
+		if !response.Success {
+			code = http.StatusBadRequest
+		}
+
+		context.JSON(code, response)
+	})
+
+	route.GET("/getmembers", func(context *gin.Context) {
+		code := http.StatusOK
+		response := services.FindAllMembers(*DreamRepository)
 
 		if !response.Success {
 			code = http.StatusBadRequest
@@ -64,7 +103,20 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 		id := context.Param("id")
 
 		code := http.StatusOK
-		response := services.FindOneContactById(id, *contactRepository)
+		response := services.FindContactById(id, *DreamRepository)
+
+		if !response.Success {
+			code = http.StatusBadRequest
+		}
+
+		context.JSON(code, response)
+	})
+
+	route.GET("/showmember/:id", func(context *gin.Context) {
+		id := context.Param("id")
+
+		code := http.StatusOK
+		response := services.FindMemberById(id, *DreamRepository)
 
 		if !response.Success {
 			code = http.StatusBadRequest
@@ -88,7 +140,31 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 
 		code := http.StatusOK
 
-		response := services.UpdateContactById(id, &contact, *contactRepository)
+		response := services.UpdateContactById(id, &contact, *DreamRepository)
+
+		if !response.Success {
+			code = http.StatusBadRequest
+		}
+
+		context.JSON(code, response)
+	})
+
+	route.PUT("/updatemember/:id", func(context *gin.Context) {
+		id := context.Param("id")
+		var member models.Member
+		err := context.ShouldBindJSON(&member)
+
+		// validation errors
+
+		if err != nil {
+			response := helpers.GenerateValidationResponse(err)
+			context.JSON(http.StatusBadRequest, response)
+			return
+		}
+
+		code := http.StatusOK
+
+		response := services.UpdateMemberById(id, &member, *DreamRepository)
 
 		if !response.Success {
 			code = http.StatusBadRequest
@@ -101,7 +177,7 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 		id := context.Param("id")
 		code := http.StatusOK
 
-		response := services.DeleteOneContactById(id, *contactRepository)
+		response := services.DeleteOneContactById(id, *DreamRepository)
 
 		if !response.Success {
 			code = http.StatusBadRequest
@@ -110,31 +186,11 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 		context.JSON(code, response)
 	})
 
-	route.POST("/delete", func(context *gin.Context) {
-		var multiID dtos.MultiID
-
-		err := context.ShouldBindJSON(&multiID)
-
-		// validation errors
-		if err != nil {
-			response := helpers.GenerateValidationResponse(err)
-
-			context.JSON(http.StatusBadRequest, response)
-
-			return
-		}
-
-		if len(multiID.Ids) == 0 {
-			response := dtos.Response{Success: false, Message: "IDs cannot be empty."}
-
-			context.JSON(http.StatusBadRequest, response)
-
-			return
-		}
-
+	route.DELETE("/deletemember/:id", func(context *gin.Context) {
+		id := context.Param("id")
 		code := http.StatusOK
 
-		response := services.DeleteContactByIds(&multiID, *contactRepository)
+		response := services.DeleteMemberById(id, *DreamRepository)
 
 		if !response.Success {
 			code = http.StatusBadRequest
@@ -148,7 +204,21 @@ func SetupRoutes(contactRepository *repositories.ContactRepository) *gin.Engine 
 
 		pagination := helpers.GeneratePaginationRequest(context)
 
-		response := services.Pagination(*contactRepository, context, pagination)
+		response := services.Pagination(*DreamRepository, context, pagination)
+
+		if !response.Success {
+			code = http.StatusBadRequest
+		}
+
+		context.JSON(code, response)
+	})
+
+	route.GET("/memberpagination", func(context *gin.Context) {
+		code := http.StatusOK
+
+		pagination := helpers.GeneratePaginationRequest(context)
+
+		response := services.MemberPagination(*DreamRepository, context, pagination)
 
 		if !response.Success {
 			code = http.StatusBadRequest
