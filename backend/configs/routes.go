@@ -14,6 +14,7 @@ import (
 
 func SetupRoutes(DreamRepository *repositories.DreamRepository) *gin.Engine {
 	route := gin.Default()
+	route.LoadHTMLGlob("views/*")
 
 	// create route /create endpoint
 
@@ -78,14 +79,7 @@ func SetupRoutes(DreamRepository *repositories.DreamRepository) *gin.Engine {
 	})
 
 	route.GET("/", func(context *gin.Context) {
-		code := http.StatusOK
-		response := services.FindAllContacts(*DreamRepository)
-
-		if !response.Success {
-			code = http.StatusBadRequest
-		}
-
-		context.JSON(code, response)
+		context.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 
 	route.GET("/getmembers", func(context *gin.Context) {
