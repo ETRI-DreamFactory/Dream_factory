@@ -43,43 +43,26 @@ body {
 }
 </style>
 
-<script language='javascript'>
-	function test(){
-		alert("해당 프로젝트 후원이 정상적으로 완료 되었습니다.");
-		location.href = "./project support list.html"
-	}
-</script>
-
 </head>
 
 <body>
 	<article>
 		<div class="container" role="main">
-			<h2>프로젝트 후원하기</h2>
+			<h2>프로젝트 후원내역</h2>
 			<form name="form" id="form" role="form" method="post" action="">
 				<div class="mb-3">
-					<label for="reg_id">프로젝트 선택</label>
-					<select name="select_service" id="v" class="form-control" data-style="btn-white">
-							<option value="Selct">선택</option>
-							<option value="1">프로젝트 1</option>
-							<option value="2">프로젝트 2</option>
-							<option value="3">프로젝트 3</option>
-
-					 </select>
-				</div>
-				<div id="display_option" class="mb-3" style="display: none">
-					<label for="content">후원 금액</label>
-					<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="후원 금액을 입력해 주세요">
+				<a href="./projecttest.html">
+				<img src="./project_image/project1/project_main_image.png"><br>	
+				<b>4억 돌파ㅣ바이오산업 투자ㅣ전임상 완료ㅣCAR-T치료제</b>
+				<a>
 				</div>
 			</form>
 			<div>
-				<button type="button" class="btn btn-sm btn-primary" onClick="test()"id="btnSave">
-				확인</button> <!-- 저장 링크 코드 수정하기 미완료 !!-->
-				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./index.html' " >취소</button> <!-- 취소 버튼 활성화 완료 --><br><br>
-				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./project support list.html' " >프로젝트 후원내역</button>
+				<br><br><br>
+				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./index.html' " >홈으로 가기</button> <!-- 취소 버튼 활성화 완료 -->
+				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./project support.html' " >다른 프로젝트 후원하기</button> <!-- 저장 링크 코드 수정하기 미완료 !!-->
 			</div>
 		</div>
-
 	</article>
 </body>
 </html>

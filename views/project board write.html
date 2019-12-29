@@ -41,13 +41,19 @@ body {
   padding-bottom: 30px;
 }
 </style>
+
+<script language='javascript'>
+	function test(){
+		alert("프로젝트가 등록 되었습니다.");
+	}
+</script>
 </head>
 
 <body>
 	<article>
 		<div class="container" role="main">
 			<h2>프로젝트 등록</h2>
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+			<form name="form" id="form" role="form" method="post" action="">
 				<div class="mb-3">
 					<label for="title">제목</label>
 					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
@@ -84,7 +90,7 @@ body {
 
 			</form>
 			<div>
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">등록</button> <!-- 저장 링크 코드 수정하기 미완료 !!-->
+				<button type="button" class="btn btn-sm btn-primary" onclick="test()" id="btnSave">등록</button> <!-- 저장 링크 코드 수정하기 미완료 !!-->
 				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./index.html' " >취소</button> <!-- 취소 버튼 활성화 완료 -->
 			</div>
 		</div>

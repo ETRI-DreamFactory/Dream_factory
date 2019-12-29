@@ -91,8 +91,8 @@
                      <h2><span style="color:rgb(240, 173, 207)">Dream Factory</span></h2>
                      <img style="margin-bottom:40px;" class="border-line-img" src="uploads/building/sep-line-white.png" alt="" />
                      <p class="lead">Dream Factory 에서 당신의 꿈을 실현하거나 누군가의 꿈을 후원하세요!</p>
-                     <a data-scroll href="#services" class="btn btn-light btn-radius btn-brd">프로젝트 등록</a>
-                     <a data-scroll href="#services" class="btn btn-light btn-radius btn-brd">프로젝트 후원</a>
+                     <a data-scroll onclick="location.href='./project board write.html' " class="btn btn-light btn-radius btn-brd">프로젝트 등록</a>
+                     <a data-scroll onclick="location.href='./project support.html' " class="btn btn-light btn-radius btn-brd">프로젝트 후원</a>
                   </div>
                </div>
             </div>
@@ -415,7 +415,7 @@
                   <div class="testi-carousel owl-carousel owl-theme">
                      <div class="testimonial clearfix">
                         <div class="desc">
-                           <h3><i class="fa fa-quote-left"></i> 와 씨발 이런 프로젝트는 처음이에여!</h3>
+                           <h3><i class="fa fa-quote-left"></i> 와 이런 프로젝트는 처음이에여!</h3>
                            <p class="lead">제가 일평생 이런 제품이 있으면 좋겠다고 생각했는데 이 프로젝트 진짜 최고네여</p>
                         </div>
                         <div class="testi-meta">
@@ -668,19 +668,16 @@
                               <input type="email" name="email" id="email" class="form-control" placeholder="Your Email">
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Website">
+                              <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone Number">
                            </div>
                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <label class="sr-only">Select Department</label>
                               <select name="select_service" id="select_service" class="selectpicker form-control" data-style="btn-white">
-                                 <option value="12">포지션</option>
-                                 <option value="Building Service">개발자</option>
-                                 <option value="Tover Design">후원자</option>
-                                 <option value="Others">모두</option>
+                                 <option name="select_service" value="r1">포지션</option>
+                                 <option name="select_service" value="r2">개발자</option>
+                                 <option name="select_service" value="r3">후원자</option>
+                                 <option name="select_service" value="r4">모두</option>
                               </select>
-                           </div>
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <textarea class="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
                            </div>
                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                               <button type="submit" value="SEND" id="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">제출</button>
@@ -783,5 +780,8 @@
       <script src="js/custom.js"></script>
       <script src="js/portfolio.js"></script>
       <script src="js/hoverdir.js"></script>
+
+	  <script type="module" src="./metamask.js"></script>
+
    </body>
 </html>
