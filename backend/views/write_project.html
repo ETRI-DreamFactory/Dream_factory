@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="style.css">
+<!-- Colors CSS -->
+<link rel="stylesheet" href="css/colors.css">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" href="css/versions.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="css/responsive.css">
+<!-- building CSS -->
+<link rel="stylesheet" href="css/building.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+<title>board</title>
+
+<script>
+	$(document).on('click', '#btnSave', function(e){
+		e.preventDefault();
+		$("#form").submit();
+	}); <!-- #btnSave라는 id를 가진 버튼을 클릭하면 동작하는 스크립트-->
+
+	$(document).on('click', '#btnList', function(e){
+		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/board/getBoardList";
+	});
+</script>
+<style>
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+</style>
+
+<script language='javascript'>
+	function test(){
+		alert("프로젝트가 등록 되었습니다.");
+	}
+</script>
+</head>
+
+<body>
+	<article>
+		<div class="container" role="main">
+			<h2>프로젝트 등록</h2>
+			<form name="form" id="form" role="form" method="post" action="">
+				<div class="mb-3">
+					<label for="title">제목</label>
+					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+				</div>
+				<div class="mb-3">
+			  <label for="title">프로젝트 분류</label>
+					 <label class="sr-only">Select Department</label>
+					 <select name="select_service" id="select_service" class=" form-control" data-style="btn-white">
+							<option value="Selct">선택</option>
+							<option value="1">출산/육아</option>
+							<option value="2">생활/건강</option>
+							<option value="3">디지털/가전</option>
+							<option value="4">스포츠/레저</option>
+							<option value="5">패션잡화</option>
+							<option value="6">가구/인테리어</option>
+							<option value="7">식품</option>
+							<option value="8">화장품/미용</option>
+							<option value="9">여행/문화</option>
+							<option value="10">패션의류</option>
+							<option value="11">IT/컴퓨터</option>
+							<option value="12">기타</option>
+					 </select>
+				</div>
+
+				<div class="mb-3">
+					<label for="reg_id">프로젝트 이름</label>
+					<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="프로젝트명을 입력해 주세요">
+				</div>
+
+				<div class="mb-3">
+					<label for="content">프로젝트 소개</label>
+					<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+				</div>
+
+			</form>
+			<div>
+				<button type="button" class="btn btn-sm btn-primary" onclick="test()" id="btnSave">등록</button> <!-- 저장 링크 코드 수정하기 미완료 !!-->
+				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='./index.html' " >취소</button> <!-- 취소 버튼 활성화 완료 -->
+			</div>
+		</div>
+	</article>
+</body>
+</html>
